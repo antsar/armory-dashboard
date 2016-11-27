@@ -31,15 +31,14 @@ def scrape():
         if event_tree.xpath('//a[text()="Final Results"]'):
             fencers = event_tree.xpath('//div[@id="finalResults"]/table/tr/td[2]/text()')
             fencers = dict(zip(fencers, repeat("Checked In")))
-            event_status = "Event Closed ({0} fencers)".format(len(fencers))
+            event_status = "Event has closed.".format(len(fencers))
         elif event_tree.xpath('//a[text()="Seeding"]'):
             fencers = event_tree.xpath('//div[@id="Round1Seeding"]/table/tr/td[2]/text()')
             fencers = dict(zip(fencers, repeat("Checked In")))
-            event_status = "Event is Ongoing ({0} fencers)".format(len(fencers))
+            event_status = "Event is ongoing.".format(len(fencers))
         elif event_tree.xpath('//a[text()="Check-In Status"]'):
-            event_status = event_tree.xpath(
-                'normalize-space(//div[@class="checkInSummary"]/text())')
-            fencers_checked_in = event_tree.xpath('//div[@id="checkIn"]/table/tr/td[1]/text()')
+            event_status = "Check-in is open."
+            fencers_checked_in = [True if len(list(f)) else False for f in event_tree.xpath('//div[@id="checkIn"]/table/tr/td[1]')]
             fencers = event_tree.xpath('//div[@id="checkIn"]/table/tr/td[2]/text()')
             fencers = dict(zip(fencers, fencers_checked_in))
         try:
@@ -57,7 +56,6 @@ def scrape():
             'previous_total': 0
         }
         for fencer, is_checked_in in fencers.items():
-            is_checked_in = bool(is_checked_in.strip())
             fencer = fencer.strip()
             this_event['fencers'].append(fencer)
             if is_checked_in:

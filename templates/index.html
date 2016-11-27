@@ -34,26 +34,27 @@
     </style>
 </head>
 <body>
-    <h1>{{tournament_name}}</h1>
-    <h2>{{tournament_details}}</h2>
-    <h2>{{events|length}} Events</h2>
+    <h1>{{ tournament_name }}</h1>
+    <h2>{{ tournament_details }}</h2>
+    <h2>{{ events|length }} Events</h2>
     <hr>
     {% for e in events %}
     <section>
-    <a name="{{e['name']}}">
-    <h3><a href="#{{e['name']}}">{{e['name']}}</a></h3>
-    <h4>{{e['time']}}</h4>
-    <p>{{e['status']}}</p>
+    <a name="{{ e['name'] }}">
+    <h3><a href="#{{ e['name'] }}">{{ e['name'] }}</a></h3>
+    <h4>{{ e['time'] }}</h4>
+    <p>{{ e['status'] }}</p>
+    <p><strong>{{ e['fencers_checked_in']|length }}</strong> of <strong>{{ e['fencers']|len }}</strong> fencers have checked in.</p>
     {% if e['previously_fenced'] %}
-    <p>{{e['previous_total']}} fencers have participated in prior events:</p>
+    <p><strong>{{ e['previous_total'] }}</strong> fencers have participated in prior events:</p>
     <ul>
     {% for pe in e['previously_fenced'] %}
-        <li>{{pe}} - {{e['previously_fenced'][pe]}} fencers</li>
+        <li><strong>{{ pe }}</strong> - {{ e['previously_fenced'][pe] }} fencers</li>
     {% endfor %}
     </ul>
     {% endif %}
     {% if e['new_fencers_not_checked_in'] %}
-    <p class="hl">{{e['new_fencers_not_checked_in']|length}} new fencers not yet checked in</p>
+    <p class="hl">{{ e['new_fencers_not_checked_in']|length }} new fencers not yet checked in</p>
     {% endif %}
     </section>
     {% endfor %}
