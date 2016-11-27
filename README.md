@@ -10,7 +10,7 @@ This is a quick weekend hack, very much not "production-ready". Use at your own 
 
 ## Setup
 
-* Create a [virtualenv](https://virtualenv.pypa.io/en/stable/)
+* Create a Python 3 [virtualenv](https://virtualenv.pypa.io/en/stable/)
 * `pip install -r requirements.txt` to install Python dependencies
 
 ## Run
