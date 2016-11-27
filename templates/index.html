@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Armory Dashboard</title>
+    <style>
+        body {
+            font: 14px sans-serif;
+        }
+        section {
+            border-bottom: 2px solid #aaa;
+        }
+        p {
+            margin: .25em 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{tournament_name}}</h1>
+    <h2>{{tournament_details}}</h2>
+    <h2>{{events|length}} Events</h2>
+    <hr>
+    {% for e in events %}
+    <section>
+    <a name="{{e['name']}}">
+    <h3><a href="#{{e['name']}}">{{e['name']}}</a></h3>
+    <p>{{e['status']}}</p>
+    {% if e['previously_fenced'] %}
+    <p>{{e['previous_total']}} fencers have previously checked in:</p>
+    <ul>
+    {% for pe in e['previously_fenced'] %}
+        <li>{{pe}} - {{e['previously_fenced'][pe]}} fencers</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    </section>
+    {% endfor %}
+</body>
+</html>
