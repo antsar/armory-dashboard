@@ -24,7 +24,9 @@ def scrape():
         event = requests.get(event_url)
         event_tree = html.fromstring(event.content)
         event_details = event_tree.xpath(
-            '//span[@class="tournDetails"]/text()')[0]
+            '//span[@class="tournDetails"]/text()')
+        event_name = event_details[0]
+        event_time = event_details[1]
         if event_tree.xpath('//a[text()="Final Results"]'):
             fencers = event_tree.xpath('//div[@id="finalResults"]/table/tr/td[2]/text()')
             event_status = "Event Closed ({0} fencers)".format(len(fencers))
@@ -40,7 +42,8 @@ def scrape():
         except:
             pass
         this_event = {
-            'name': event_details,
+            'name': event_name,
+            'time': event_time,
             'status': event_status,
             'fencers': [],
             'previously_fenced': {},
