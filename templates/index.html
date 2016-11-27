@@ -36,7 +36,7 @@
 <body>
     <h1>{{ tournament_name }}</h1>
     <h2>{{ tournament_details }}</h2>
-    <h2>{{ events|length }} Events</h2>
+    <h2>{{ events | length }} Events</h2>
     <hr>
     {% for e in events %}
     <section>
@@ -44,7 +44,7 @@
     <h3><a href="#{{ e['name'] }}">{{ e['name'] }}</a></h3>
     <h4>{{ e['time'] }}</h4>
     <p>{{ e['status'] }}</p>
-    <p><strong>{{ e['fencers_checked_in']|length }}</strong> of <strong>{{ e['fencers']|len }}</strong> fencers have checked in.</p>
+    <p><strong>{{ e['fencers_checked_in'] | length }}</strong> of <strong>{{ e['fencers'] | length }}</strong> fencers have checked in.</p>
     {% if e['previously_fenced'] %}
     <p><strong>{{ e['previous_total'] }}</strong> fencers have participated in prior events:</p>
     <ul>
@@ -54,7 +54,7 @@
     </ul>
     {% endif %}
     {% if e['new_fencers_not_checked_in'] %}
-    <p class="hl">{{ e['new_fencers_not_checked_in']|length }} new fencers not yet checked in</p>
+    <p class="hl">{{ e['new_fencers_not_checked_in'] | length }} new fencers not yet checked in</p>
     {% endif %}
     </section>
     {% endfor %}
