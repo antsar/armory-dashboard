@@ -4,59 +4,38 @@
     <meta charset="utf-8">
     <title>Armory Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font: 18px sans-serif;
-        }
-        section {
-            border-bottom: 1px dashed #aaa;
-            margin: 1em 0;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            margin: .35em 0;
-        }
-        p, ul {
-            margin: .25em 0;
-        }
-        a:link,
-        a:active,
-        a:visited {
-            text-decoration: none;
-            color: #000;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #000;
-        }
-        .hl {
-            background-color: #ee8;
-        }
-    </style>
+    <meta http-equiv="refresh" content="60; URL={{ url_for('index') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>{{ tournament_name }}</h1>
-    <h2>{{ tournament_details }}</h2>
-    <h2>{{ events | length }} Events</h2>
-    <hr>
+    <header>
+        <h1>{{ tournament_name }} - {{ events | length }} events</h1>
+    </header>
+    <main>
     {% for e in events %}
-    <section>
-    <a name="{{ e['name'] }}">
-    <h3><a href="#{{ e['name'] }}">{{ e['name'] }}</a></h3>
-    <h4>{{ e['time'] }}</h4>
-    <p>{{ e['status'] }}</p>
-    <p><strong>{{ e['fencers_checked_in'] | length }}</strong> of <strong>{{ e['fencers'] | length }}</strong> fencers have checked in.</p>
+    <section class="status-{{ e['status'] }}">
+    <header>
+        <div class="status">{{ e['status'] }}</div>
+        <div class="name">
+            <a name="{{ e['name'] }}" href="#{{ e['name'] }}">{{ e['name'] }}</a>
+        </div>
+        <div class="time">{{ e['time'] }}</div>
+    </header>
+    <h4></h4>
+    <p><span class="number">{{ e['fencers_checked_in'] | length }}</span> of <span class="number">{{ e['fencers'] | length }}</span> fencer(s) checked in.</p>
     {% if e['previously_fenced'] %}
-    <p><strong>{{ e['previous_total'] }}</strong> fencers have participated in prior events:</p>
+    <p><span class="number">{{ e['previous_total'] }}</span> fenced in prior events:</p>
     <ul>
     {% for pe in e['previously_fenced'] %}
-        <li><strong>{{ pe }}</strong> - {{ e['previously_fenced'][pe] }} fencers</li>
+        <li>{{ pe }} - {{ e['previously_fenced'][pe] }}</li>
     {% endfor %}
     </ul>
     {% endif %}
     {% if e['new_fencers_not_checked_in'] %}
-    <p class="hl">{{ e['new_fencers_not_checked_in'] | length }} new fencers not yet checked in</p>
+    <p class="hl">{{ e['new_fencers_not_checked_in'] | length }} new and not checked in</p>
     {% endif %}
     </section>
     {% endfor %}
+    </main>
 </body>
 </html>

@@ -6,7 +6,7 @@ from itertools import repeat
 
 
 def scrape():
-    results_url = "http://www.escrimeresults.com/cobra/index.htm"
+    results_url = "https://fencingresults.ant.sr/cobra/"
     results = requests.get(results_url)
     results_tree = html.fromstring(results.content)
     try:
@@ -31,13 +31,13 @@ def scrape():
         if event_tree.xpath('//a[text()="Final Results"]'):
             fencers = event_tree.xpath('//div[@id="finalResults"]/table/tr/td[2]/text()')
             fencers = dict(zip(fencers, repeat("Checked In")))
-            event_status = "Event has closed.".format(len(fencers))
+            event_status = "closed"
         elif event_tree.xpath('//a[text()="Seeding"]'):
             fencers = event_tree.xpath('//div[@id="Round1Seeding"]/table/tr/td[2]/text()')
             fencers = dict(zip(fencers, repeat("Checked In")))
-            event_status = "Event is ongoing.".format(len(fencers))
+            event_status = "ongoing"
         elif event_tree.xpath('//a[text()="Check-In Status"]'):
-            event_status = "Check-in is open."
+            event_status = "open"
             fencers_checked_in = [True if len(list(f)) else False for f in event_tree.xpath('//div[@id="checkIn"]/table/tr/td[1]')]
             fencers = event_tree.xpath('//div[@id="checkIn"]/table/tr/td[2]/text()')
             fencers = dict(zip(fencers, fencers_checked_in))

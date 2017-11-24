@@ -1,0 +1,90 @@
+body {
+    font: 18px sans-serif;
+    color: #fff;
+    background-color: #000;
+    max-width: 100%;
+}
+main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+h1 {
+    font-size: 1.2em;
+}
+div.name,
+div.time {
+    margin: .5em 0;
+}
+div.name {
+    font-size: 1.1em;
+}
+div.time {
+    font-size: .80em;
+}
+section {
+    border-radius: 1em;
+    border: 2px solid #555;
+    margin: .5em;
+    padding: .75em;
+    flex: 15em 1 0;
+}
+section > :first-child {
+    margin-top: 0;
+}
+section > :last-child {
+    margin-bottom: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: .35em 0;
+}
+p, ul {
+    margin: .25em 0;
+}
+a:link,
+a:active,
+a:visited {
+    text-decoration: none;
+    color: #fff;
+}
+a:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+/* Important text */
+.hl {
+    color: #ee4;
+    font-size: 1.15em;
+}
+
+/* Event statuses */
+.status {
+    float: right;
+    color: #000;
+    border-radius: .25em;
+    border: 2px solid #fff;
+    padding: .1em;
+    font-size: .8em;
+    font-weight: bold;
+    margin-bottom: .1em;
+    vertical-align: top;
+}
+.status-open .status {
+    background-color: #0f0;
+}
+.status-ongoing .status {
+    background-color: #ff0;
+}
+.status-closed .status {
+    background-color: #f00;
+}
+
+/* Numbers */
+span.number {
+    font-weight: bold;
+    font-size: 1.1em;
+}
