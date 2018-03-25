@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Armory Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?t=20180325">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/icons/apple-touch-icon.png') }}?t=20180325">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/icons/favicon-32x32.png') }}?t=20180325">
@@ -16,6 +16,7 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="{{ url_for('static', filename='images/icons/browserconfig.xml') }}?t=20180325">
     <meta name="theme-color" content="#ffffff">
+    {% block extra_head %}{% endblock extra_head %}
 </head>
 <body class="page-{{ request.endpoint }}">
     {% block content %}{% endblock content %}

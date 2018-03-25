@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block extra_head %}
+    <meta http-equiv="refresh" content="60; URL={{ url_for('live') }}">
+{% endblock extra_head %}
 {% block content %}
     <header>
         <span class="back-to-home"><a href="{{ url_for('index') }}">Back to Home</a></span>

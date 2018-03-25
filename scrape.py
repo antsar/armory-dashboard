@@ -6,7 +6,10 @@ from itertools import repeat
 
 
 def scrape(results_url):
-    results = requests.get(results_url)
+    try:
+        results = requests.get(results_url)
+    except requests.exceptions.MissingSchema:
+        results = requests.get("http://{}".format(results_url))
     results_tree = html.fromstring(results.content)
     try:
         event_urls = results_tree.xpath(
@@ -20,13 +23,16 @@ def scrape(results_url):
     events = []
     for event_url in event_urls:
         if not urlparse(event_url).netloc:
-            event_url = urljoin(results_url, event_url)
+            event_url = urljoin(results.url, event_url)
         event = requests.get(event_url)
         event_tree = html.fromstring(event.content)
         event_details = event_tree.xpath(
             '//span[@class="tournDetails"]/text()')
-        event_name = event_details[0]
-        event_time = event_details[1]
+        try:
+            event_name = event_details[0]
+            event_time = event_details[1]
+        except:
+            raise(Exception("Failed to interpret live results for event \"{}\".".format(event_url)))
         if event_tree.xpath('//a[text()="Final Results"]'):
             fencers = event_tree.xpath('//div[@id="finalResults"]/table/tr/td[2]/text()')
             fencers = dict(zip(fencers, repeat("Checked In")))

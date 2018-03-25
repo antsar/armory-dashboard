@@ -12,9 +12,23 @@
                 <label>Live Results URL: &nbsp;
                     <select name="results_url">
                         <option value="" selected disabled>-- Select One --</option>
-                        <option value="http://escrimeresults.com/cobra/">Cobra</option>
-                        <option value="http://escrimeresults.com/thrust/">Thrust</option>
-                        <option value="http://njfencingresults.org/liveresults/">NJFencingResults.org</option>
+                        <optgroup label="Escrime Management">
+                            <option value="http://escrimeresults.com/tournaments/NCAA.html">NCAA</option>
+                            <option value="http://escrimeresults.com/tournaments/Atlantic-Coast-Conference.html">Atlantic Coast Conference</option>
+                            <option value="http://escrimeresults.com/tournaments/Ivy-League.html">Ivy League</option>
+                            <option value="http://escrimeresults.com/cobra/">Cobra</option>
+                            <option value="http://escrimeresults.com/thrust/">Thrust</option>
+                            <option value="http://escrimeresults.com/tournaments/NJSIAA.html">NJSIAA</option>
+                            <option value="http://escrimeresults.com/Candlewood/">Candlewood</option>
+                            <option value="http://escrimeresults.com/tournaments/U-Penn.html">U Penn</option>
+                            <option value="http://escrimeresults.com/tournaments/Temple-University.html">Temple U</option>
+                            <option value="http://escrimeresults.com/Big1/">Big1</option>
+                            <option value="http://escrimeresults.com/tournaments/US-Collegiate-Squad-Championships.html">US Collegiate Squad</option>
+                            <option value="http://escrimeresults.com/MKHS/">MKHS</option>
+                        </optgroup>
+                        <optgroup label="NJ Division">
+                            <option value="http://njfencingresults.org/liveresults/">NJFencingResults.org/liveresults</option>
+                        </optgroup>
                     </select>
                 </label>
                 <input type="submit" value="Go!">
@@ -23,7 +37,7 @@
         <p>
             <form action="{{ url_for('live') }}" method="get">
                 <label>Other URL: &nbsp;
-                    <input name="results_url" placeholder="http://example.com/liveresults">
+                    <input name="results_url" placeholder="example.com/liveresults">
                 </label>
                 <input type="submit" value="Go!">
             </form>
