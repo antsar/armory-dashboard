@@ -4,40 +4,6 @@ body {
     background-color: #000;
     max-width: 100%;
 }
-body.page-live header span.back-to-home {
-    float: right;
-    font-size: .8em;
-    opacity: .6;
-}
-body.page-live main {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    align-content: flex-start;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-body.page-live p, ul {
-    margin: .25em 0;
-}
-body.page-home form {
-    display: flex;
-    flex-wrap: wrap;
-}
-body.page-home form > * {
-    flex: auto 1 0;
-}
-body.page-home label {
-    display: flex;
-    flex-wrap: wrap;
-}
-body.page-home input,
-body.page-home select {
-    flex: 15em 1 0;
-}
-body.page-home input[type=submit] {
-    flex: 6em 0 0;
-}
 h1 {
     font-size: 1.2em;
 }
@@ -110,4 +76,41 @@ a:hover {
 span.number {
     font-weight: bold;
     font-size: 1.1em;
+}
+
+
+/* Page-specific styles */
+body.page-live header span.back-to-home {
+    float: right;
+    font-size: .8em;
+    opacity: .6;
+}
+body.page-live main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+body.page-live p, ul {
+    margin: .25em 0;
+}
+body.page-index form {
+    display: flex;
+    flex-wrap: wrap;
+}
+body.page-index form > * {
+    flex: auto 1 0;
+}
+body.page-index label {
+    display: flex;
+    flex-wrap: wrap;
+}
+body.page-index input,
+body.page-index select {
+    flex: 15em 1 0;
+}
+body.page-index input[type=submit] {
+    flex: 6em 0 0;
 }

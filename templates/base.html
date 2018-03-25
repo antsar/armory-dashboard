@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Armory Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?t=20180325">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/icons/apple-touch-icon.png') }}?t=20180325">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/icons/favicon-32x32.png') }}?t=20180325">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/icons/favicon-16x16.png') }}?t=20180325">
+    <link rel="manifest" href="{{ url_for('static', filename='images/icons/site.webmanifest') }}?t=20180325">
+    <link rel="mask-icon" href="{{ url_for('static', filename='images/icons/safari-pinned-tab.svg') }}?t=20180325" color="#5bbad5">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icons/favicon.ico') }}?t=20180325">
+    <meta name="apple-mobile-web-app-title" content="Armory">
+    <meta name="application-name" content="Armory">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="{{ url_for('static', filename='images/icons/browserconfig.xml') }}?t=20180325">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body class="page-{{ request.endpoint }}">
+    {% block content %}{% endblock content %}
+</body>
+</html>
