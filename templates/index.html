@@ -10,7 +10,7 @@
         <p>
             <form action="{{ url_for('live') }}" method="get">
                 <label>Live Results URL: &nbsp;
-                    <select name="results_url">
+                    <select name="results_url" onchange="this.form.submit()">
                         <option value="" selected disabled>-- Select One --</option>
                         <optgroup label="Escrime Management">
                             <option value="http://escrimeresults.com/tournaments/NCAA.html">NCAA</option>

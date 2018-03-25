@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block extra_head %}
-    <meta http-equiv="refresh" content="60; URL={{ url_for('live') }}">
+    <meta http-equiv="refresh" content="60; URL={{ request.url }}">
 {% endblock extra_head %}
 {% block content %}
     <header>

@@ -15,11 +15,14 @@ def scrape(results_url):
         event_urls = results_tree.xpath(
             '//div[@id="schedule"]/table/tr/td/a[text()="View"]/@href')
     except IndexError:
-        return "No event schedule found"
-    tournament_name = results_tree.xpath(
-        '//span[@class="tournName"]/text()')[0]
-    tournament_details = results_tree.xpath(
-        '//span[@class="tournDetails"]/text()')[0]
+        return "No event schedule found."
+    try:
+        tournament_name = results_tree.xpath(
+            '//span[@class="tournName"]/text()')[0]
+        tournament_details = results_tree.xpath(
+            '//span[@class="tournDetails"]/text()')[0]
+    except IndexError:
+        return "Tournament info not found."
     events = []
     for event_url in event_urls:
         if not urlparse(event_url).netloc:
