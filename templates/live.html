@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Armory Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="60; URL={{ url_for('index') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="page-live">
+    <header>
+        <span class="back-to-home"><a href="{{ url_for('index') }}">Back to Home</a></span>
+        <h1>{{ tournament_name }} - {{ events | length }} events</h1>
+    </header>
+    <main>
+    {% for e in events %}
+    <section class="status-{{ e['status'] }}">
+    <header>
+        <div class="status">{{ e['status'] }}</div>
+        <div class="name">
+            <a name="{{ e['name'] }}" href="#{{ e['name'] }}">{{ e['name'] }}</a>
+        </div>
+        <div class="time">{{ e['time'] }}</div>
+    </header>
+    <h4></h4>
+    <p><span class="number">{{ e['fencers_checked_in'] | length }}</span> of <span class="number">{{ e['fencers'] | length }}</span> fencer(s) checked in.</p>
+    {% if e['previously_fenced'] %}
+    <p><span class="number">{{ e['previous_total'] }}</span> fenced in prior events:</p>
+    <ul>
+    {% for pe in e['previously_fenced'] %}
+        <li>{{ pe }} - {{ e['previously_fenced'][pe] }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% if e['new_fencers_not_checked_in'] %}
+    <p class="hl">{{ e['new_fencers_not_checked_in'] | length }} new and not checked in</p>
+    {% endif %}
+    </section>
+    {% endfor %}
+    </main>
+</body>
+</html>

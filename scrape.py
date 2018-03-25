@@ -5,8 +5,7 @@ from urllib.parse import urlparse, urljoin
 from itertools import repeat
 
 
-def scrape():
-    results_url = "https://fencingresults.ant.sr/cobra/"
+def scrape(results_url):
     results = requests.get(results_url)
     results_tree = html.fromstring(results.content)
     try:
