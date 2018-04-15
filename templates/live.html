@@ -9,9 +9,9 @@
     </header>
     <main>
     {% for e in events %}
-    <section class="status-{{ e['status'] }}">
+    <section class="status-{{ e['status']|lower }}">
     <header>
-        <div class="status">{{ e['status'] }}</div>
+        <div class="status">{{ e['status']|lower }}</div>
         <div class="name">
             <a name="{{ e['name'] }}" href="#{{ e['name'] }}">{{ e['name'] }}</a>
         </div>

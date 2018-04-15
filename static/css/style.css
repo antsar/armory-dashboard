@@ -55,21 +55,22 @@ a:hover {
     float: right;
     color: #000;
     border-radius: .25em;
-    border: 2px solid #fff;
-    padding: .1em;
+    border: 1.5px solid #fff;
+    padding: .1em .2em;
     font-size: .8em;
     font-weight: bold;
     margin-bottom: .1em;
     vertical-align: top;
+    text-transform: uppercase;
 }
-.status-open .status {
-    background-color: #0f0;
+.status-registration .status {
+    background-color: #2f2;
 }
-.status-ongoing .status {
-    background-color: #ff0;
+.status-started .status {
+    background-color: #fc0;
 }
-.status-closed .status {
-    background-color: #f00;
+.status-finished .status {
+    background-color: #f22;
 }
 
 /* Numbers */
