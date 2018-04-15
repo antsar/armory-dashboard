@@ -1,6 +1,9 @@
 from lxml import html
 import requests
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse, urljoin
+
 from models import Event, Fencer, Tournament
 
 
@@ -30,26 +33,33 @@ class Scraper:
                 '//div[@id="schedule"]/table/tr/td/a[text()="View"]/@href')
         except IndexError:
             raise ScrapeError("No event schedule found.")
-        self.scrape_events(event_urls)
+
+        loop = asyncio.new_event_loop()
+        loop.run_until_complete(self.scrape_events(event_urls))
 
         return self.tournament
 
-    def scrape_events(self, event_urls):
-        for event_url in event_urls:
+    async def scrape_events(self, event_urls):
 
-            # Build full event URL (scraped URLs are relative)
-            # TODO: Is there a cleaner (less "DIY") way to do this?
-            if not urlparse(event_url).netloc:
-                event_url = urljoin(self.tournament.url, event_url)
+        with ThreadPoolExecutor(max_workers=20) as executor:
+            loop = asyncio.get_event_loop()
+            futures = []
 
-            event = self.scrape_event(event_url)
-            self.tournament.add_event(event)
-        self.tournament.count_all_fencers()
+            for event_url in event_urls:
+                if not urlparse(event_url).netloc:
+                    event_url = urljoin(self.tournament.url, event_url)
+                futures.append(loop.run_in_executor(
+                    executor,
+                    requests.get,
+                    event_url))
 
-    def scrape_event(self, event_url):
-        # Request event page
-        event = requests.get(event_url)
+            for response in await asyncio.gather(*futures):
+                event = self.parse_event(response)
+                self.tournament.add_event(event)
 
+            self.tournament.count_all_fencers()
+
+    def parse_event(self, event):
         # Get the event details (name, time) as text
         event_tree = html.fromstring(event.content)
         event_details = event_tree.xpath(
@@ -60,7 +70,7 @@ class Scraper:
         except IndexError:
             raise ScrapeError(
                 "Failed to interpret live results for event \"{}\"."
-                .format(event_url))
+                .format(event_details))
 
         # Get the event status
         if event_tree.xpath('//a[text()="Final Results"]'):
