@@ -2,9 +2,10 @@
 
 
 class Tournament:
-    def __init__(self, name, url, events=None):
+    def __init__(self, name, url, updated='', events=None):
         self.name = name
         self.url = url
+        self.updated = updated
         self.events = events or []
 
     def add_event(self, event):
@@ -29,10 +30,11 @@ class Event:
     STATUS_STARTED = EventStatus("Started")
     STATUS_FINISHED = EventStatus("Finished")
 
-    def __init__(self, name, time, status, fencers, tournament=None):
+    def __init__(self, name, time, status, url, fencers, tournament=None):
         self.name = name
         self.time = time
         self.status = status
+        self.url = url
         self.fencers = fencers
         self.tournament = tournament
 

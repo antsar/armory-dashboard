@@ -5,19 +5,24 @@
 {% block content %}
     <header>
         <span class="back-to-home"><a href="{{ url_for('index') }}">Back to Home</a></span>
-        <h1>{{ tournament_name }} - {{ events | length }} events</h1>
+        <h1>{{ tournament.name }} - {{ events | length }} events
+            <a href="{{ tournament.url }}" target="_blank">
+                <img class="ext-link" src="{{ url_for('static', filename='images/font-awesome/external-link-alt.svg') }}?t=20180415"></a></h1>
     </header>
     <main>
     {% for e in events %}
     <section class="status-{{ e['status']|lower }}">
     <header>
         <div class="status">{{ e['status']|lower }}</div>
+        <div class="event-actions">
+            <a href="{{ e.url }}" target="_blank">
+                <img class="ext-link" src="{{ url_for('static', filename='images/font-awesome/external-link-alt.svg') }}?t=20180415"></a>
+        </div>
         <div class="name">
             <a name="{{ e['name'] }}" href="#{{ e['name'] }}">{{ e['name'] }}</a>
         </div>
         <div class="time">{{ e['time'] }}</div>
     </header>
-    <h4></h4>
     <p><span class="number">{{ e['fencers_checked_in'] | length }}</span> of <span class="number">{{ e['fencers'] | length }}</span> fencer(s) checked in.</p>
     {% if e['previously_fenced'] %}
     <p><span class="number">{{ e['previous_total'] }}</span> fenced in prior events:</p>
@@ -33,4 +38,9 @@
     </section>
     {% endfor %}
     </main>
+    <footer>
+    {% if tournament.updated %}
+        <div class="updated">Last updated: <span class="date">{{ tournament.updated }}</span></div>
+    {% endif %}
+    </footer>
 {% endblock content %}

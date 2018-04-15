@@ -73,6 +73,19 @@ a:hover {
     background-color: #f22;
 }
 
+/* Event link */
+.event-actions {
+    float: right;
+    clear: both;
+}
+.event-actions img.ext-link {
+    margin: .2em 0 .2em .2em;
+}
+img.ext-link {
+    width: 1em;
+    vertical-align: baseline;
+}
+
 /* Numbers */
 span.number {
     font-weight: bold;
@@ -114,4 +127,17 @@ body.page-index select {
 }
 body.page-index input[type=submit] {
     flex: 6em 0 0;
+}
+
+
+/* Footer */
+div.updated {
+    text-align: center;
+    margin: .5em 0;
+    font-size: .9em;
+    color: #999;
+}
+div.updated span.date {
+    color: #aaa;
+    font-weight: bold;
 }

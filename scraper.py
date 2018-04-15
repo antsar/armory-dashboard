@@ -22,10 +22,13 @@ class Scraper:
         try:
             tournament_name = results_tree.xpath(
                 '//span[@class="tournName"]/text()')[0]
+            updated = (results_tree.xpath(
+                '//span[@class="lastUpdate"]/text()')[0]
+                .replace('Last Updated:', '').strip())
         except IndexError:
             raise ScrapeError("Tournament info not found.")
 
-        self.tournament = Tournament(tournament_name, results.url)
+        self.tournament = Tournament(tournament_name, results.url, updated)
 
         # Get tournament events
         try:
@@ -94,7 +97,7 @@ class Scraper:
             fencers = [Fencer(f, ci)
                        for (f, ci) in zip(fencers, fencers_checked_in)]
 
-        return Event(event_name, event_time, event_status, fencers)
+        return Event(event_name, event_time, event_status, event.url, fencers)
 
 
 class ScrapeError(Exception):

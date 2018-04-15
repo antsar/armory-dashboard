@@ -33,7 +33,7 @@ def live(results_url=None):
     scraper = Scraper(results_url)
     tournament = scraper.scrape()
     return render_template('live.html',
-                           tournament_name=tournament.name,
+                           tournament=tournament,
                            events=tournament.events)
 
 
